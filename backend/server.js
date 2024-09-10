@@ -6,6 +6,8 @@ const colors = require("colors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const userRoute = require("./routes/userRoute");
+const messageRoute = require("./routes/messageRoute");
 
 // Initialize Express app
 const app = express();
@@ -54,6 +56,10 @@ io.on("connection", (socket) => {
     console.log("Client disconnected");
   });
 });
+
+// Import routes
+app.use("/api/users", userRoute);
+app.use("/api/messages", messageRoute);
 
 // Starts server
 const PORT = process.env.PORT || 5000;
