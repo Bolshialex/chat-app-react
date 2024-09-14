@@ -35,8 +35,8 @@ const registerUser = async (req, res) => {
     if (!isStrongPassword) {
       return res.status(400).json({ message: "Password is not strong enough" });
     } else {
-      const SALT = Number(process.env.SALT);
-      const saltHashed = await bcrypt.genSalt(SALT);
+      const SALT = process.env.SALT;
+      const saltHashed = await bcrypt.genSalt(Number(SALT));
       const hashedPassword = await bcrypt.hash(password, saltHashed);
       const user = await User.create({
         username,

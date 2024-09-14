@@ -64,5 +64,5 @@ app.use("/api/messages", messageRoute);
 // Starts server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`.bgYellow.bold)
+  console.log(`Server running on http://localhost:${PORT}`.bgBlue.bold)
 );
