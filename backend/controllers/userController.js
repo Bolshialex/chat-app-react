@@ -10,10 +10,30 @@ const generateToken = (id) => {
   });
 };
 
-const registerUser = async (req, res) => {
-  const { username, email, password, repeatPassword } = req.body;
+const getUser = async (req, res) => {
   try {
-    if (!username || !email || !password || !repeatPassword) {
+    const user = await User.findById(req.userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const registerUser = async (req, res) => {
+  const { username, firstName, lastName, email, password, repeatPassword } =
+    req.body;
+  try {
+    if (
+      !username ||
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !repeatPassword
+    ) {
       return res.status(400).json({ message: "Please fill in all fields" });
     }
     const emailExists = await User.findOne({ email });
@@ -40,11 +60,15 @@ const registerUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, saltHashed);
       const user = await User.create({
         username,
+        firstName,
+        lastName,
         email,
         password: hashedPassword,
       });
       res.status(201).json({
         _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         username: user.username,
         email: user.email,
         token: generateToken(user._id),
@@ -57,7 +81,10 @@ const registerUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({}, { password: 0 });
+    const users = await User.find(
+      {},
+      { password: 0, _id: 0, createdAt: 0, updatedAt: 0, __v: 0, email: 0 }
+    ).sort({ username: 1 });
     res.status(200).json(users);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -68,7 +95,7 @@ const getUserByUserName = async (req, res) => {
   try {
     const user = await User.findOne(
       { username: req.params.username },
-      { password: 0 }
+      { password: 0, _id: 0, createdAt: 0, updatedAt: 0, __v: 0 }
     );
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -102,4 +129,37 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, getAllUsers, getUserByUserName, loginUser };
+const updateUser = async (req, res) => {
+  const { username, email, firstName, lastName } = req.body;
+  try {
+    const emailExists = await User.findOne({ email });
+    if (emailExists) {
+      res.status(400).json({ message: "Email already exists" });
+      return;
+    }
+    const usernameExists = await User.findOne({ username });
+    if (usernameExists) {
+      res.status(400).json({ message: "Username already exists" });
+      return;
+    }
+    const user = await User.findByIdAndUpdate(
+      req.userId,
+      { username, email, firstName, lastName },
+      { new: true }
+    );
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    } else res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  registerUser,
+  getAllUsers,
+  getUserByUserName,
+  loginUser,
+  updateUser,
+  getUser,
+};

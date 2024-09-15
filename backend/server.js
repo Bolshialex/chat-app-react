@@ -57,6 +57,8 @@ io.on("connection", (socket) => {
   });
 });
 
+module.exports = { server, io }; // Export both the server and io
+
 // Import routes
 app.use("/api/users", userRoute);
 app.use("/api/messages", messageRoute);

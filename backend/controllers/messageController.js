@@ -1,9 +1,7 @@
 // validate the inputs
-
 const Message = require("../models/messageModel");
 const User = require("../models/userModel");
 const Conversation = require("../models/conversationModel");
-const mongoose = require("mongoose");
 
 const getMessages = async (req, res) => {
   const { participant } = req.params;
@@ -60,7 +58,6 @@ const getMessageList = async (req, res) => {
 const sendMessage = async (req, res) => {
   const { content, receiver } = req.body;
   const sender = req.userId;
-  console.log(receiver);
   try {
     const receiverUser = await User.findOne({ username: receiver });
     if (!receiverUser) {
