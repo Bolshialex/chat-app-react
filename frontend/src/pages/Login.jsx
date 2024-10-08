@@ -1,27 +1,30 @@
 import React from "react";
-import "../styles/global.css";
+import "../styles/Login.css";
 
 function Login() {
   return (
-    <>
-      <div className="card-container">
-        <h1>Login</h1>
-        <form>
-          <div>
-            <label>Username</label>
-            <input type="text" placeholder="Username" required />
-            <label>Password</label>
-            <input type="password" placeholder="Password" required />
-            <button type="submit">Login</button>
+    <div className="card-container">
+      <form>
+        <div className="login-card">
+          <h1 className="login-card-heading">Login</h1>
+
+          <div className="login-card-content">
+            <label className="login-card-label">Username:</label>
+            <input type="text" className="form-control" required />
+            <label className="login-card-label">Password:</label>
+            <input type="password" className="form-control" required />
           </div>
-          <div>
+          <div className="login-card-inputs">
             <p>
               Don't have an account? <a href="/register">Register</a>
             </p>
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
           </div>
-        </form>
-      </div>
-    </>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import Main from "./pages/Main";
+import Messages from "./pages/Messages";
 import Register from "./pages/Register";
-
-import "./App.css";
+import "./styles/App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Main />} />
+        <Route path="/messages" element={<Messages />} />
       </Routes>
     </Router>
   );
