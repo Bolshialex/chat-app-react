@@ -3,7 +3,11 @@ const API_URL = "http://localhost:3333/api";
 
 async function login(username, password) {
   try {
-    await axios.post(`${API_URL}/login`, { username, password });
+    const response = await axios.post(`${API_URL}/users/login`, {
+      username,
+      password,
+    });
+    return response.data;
   } catch (error) {
     console.error("Error logging in: ", error);
     throw error;

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import registerFunctions from "../api/registerFunctions";
 import validator from "validator";
 import "../styles/Register.css";
 
 function Register() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     username: "",
     firstName: "",
@@ -14,6 +15,11 @@ function Register() {
     password: "",
     repeatPassword: "",
   });
+
+  useEffect(() => {
+    setError(null);
+  }, []);
+
   const handle = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -24,15 +30,15 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validator.isEmail(formData.email)) {
-      alert("Invalid email");
+      setError("Invalid email");
       return;
     }
     if (formData.password !== formData.repeatPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
     if (!validator.isStrongPassword(formData.password)) {
-      alert("Password is not strong enough");
+      setError("Password is not strong enough");
       return;
     }
 
@@ -45,9 +51,9 @@ function Register() {
         const status = error.response.status;
         console.log(status);
         if (status === 409) {
-          alert("User already exists.");
+          setError("User already exists.");
         } else {
-          alert("Registration Failed - Please try again.");
+          setError("Registration Failed - Please try again.");
         }
       });
   };
@@ -55,7 +61,23 @@ function Register() {
     <div className="card-container">
       <form onSubmit={handleSubmit}>
         <div className="register-card">
-          <h1 className="register-card-heading">Register</h1>
+          <div>
+            <h1 className="register-card-heading">Register</h1>
+            {error && (
+              <div
+                className="alert alert-danger text-center alert-box"
+                role="alert"
+                style={{
+                  width: "300px",
+                  fontSize: "14px",
+                  padding: "10px",
+                  margin: "10px 0",
+                }}
+              >
+                {error}
+              </div>
+            )}
+          </div>
 
           <div className="register-card-content">
             <label className="register-card-label" htmlFor="username">
@@ -133,7 +155,7 @@ function Register() {
           </div>
           <div className="register-card-inputs">
             <p>
-              Already have an account? <a href="/login">Login</a>
+              Already have an account? <Link to="/login">Login</Link>
             </p>
             <button type="submit" className="btn btn-primary">
               Create Account
