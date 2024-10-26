@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../styles/Login.css";
 import loginFunctions from "../api/loginFunctions";
 import { useNavigate, Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 function Login() {
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
@@ -30,10 +32,15 @@ function Login() {
       .login(formData.username, formData.password)
       .then((response) => {
         console.log(response);
+        const accessToken = response?.token;
+        const userId = response?._id;
+        console.log(response);
+        setAuth({ accessToken, userId });
         navigate("/messages");
       })
       .catch((error) => {
-        if (error.response.status === 401) {
+        console.log(error);
+        if (error.response?.status === 401) {
           setError("Invalid username or password.");
         } else {
           setError("Login Failed - Please try again.");

@@ -1,18 +1,22 @@
-.card-container {
+.messages-card-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.message-list {
+.messages-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.messages-message-list {
   overflow: auto;
 }
 
 .messages-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 20px;
   border: #dddddd 1px solid;
   background-color: #eeeeee;
@@ -28,4 +32,38 @@
   font-weight: 700;
   margin: 0 0 0 0;
   text-align: center;
+}
+
+.messages-message-list {
+  padding: 0;
+  margin: 0;
+}
+
+.messages-message-list-item {
+  list-style: none;
+  border-bottom: solid 1px #dddddd;
+  padding: 5px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.messages-message-list-item:hover {
+  background-color: #dddddd;
+  border-bottom: solid 1px #cccccc;
+}
+
+.messages-user-heading {
+  margin: 3px;
+  font-size: 30px;
+}
+.messages-user-last {
+  margin: 3px;
+  font-size: 18px;
+  color: #878787;
+}
+
+.messages-icon {
+  margin: 0 0 0 0;
+  font-size: 20px;
+  color: #000000;
 }

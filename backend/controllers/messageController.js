@@ -29,7 +29,7 @@ const getMessages = async (req, res) => {
 
 //receiver or sender where id is not equal to the current user id
 const getMessageList = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.user.id;
   try {
     const conversations = await Conversation.find({
       participants: userId,
@@ -57,7 +57,8 @@ const getMessageList = async (req, res) => {
 
 const sendMessage = async (req, res) => {
   const { content, receiver } = req.body;
-  const sender = req.userId;
+  const sender = req.user.id;
+  console.log(req);
   try {
     const receiverUser = await User.findOne({ username: receiver });
     if (!receiverUser) {
