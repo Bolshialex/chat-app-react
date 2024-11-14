@@ -15,4 +15,18 @@ async function getUser(accessToken) {
   }
 }
 
-export default { getUser };
+async function updateUser(accessToken, user) {
+  try {
+    const response = await axios.put(`${API_URL}/users/update`, user, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch {
+    console.error("Error updating user: ", error);
+    throw error;
+  }
+}
+
+export default { getUser, updateUser };

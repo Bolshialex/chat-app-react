@@ -12,7 +12,6 @@ const generateToken = (id) => {
 
 const getUser = async (req, res) => {
   try {
-    console.log(req.user.id);
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -132,19 +131,26 @@ const loginUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { username, email, firstName, lastName } = req.body;
+
   try {
     const emailExists = await User.findOne({ email });
-    if (emailExists) {
-      res.status(400).json({ message: "Email already exists" });
-      return;
+    const currentUser = await User.findById(req.body._id);
+    if (currentUser.email !== email) {
+      if (emailExists) {
+        res.status(400).json({ message: "Email already exists" });
+        return;
+      }
     }
-    const usernameExists = await User.findOne({ username });
-    if (usernameExists) {
-      res.status(400).json({ message: "Username already exists" });
-      return;
+
+    if (currentUser.username !== username) {
+      const usernameExists = await User.findOne({ username });
+      if (usernameExists) {
+        res.status(400).json({ message: "Username already exists" });
+        return;
+      }
     }
     const user = await User.findByIdAndUpdate(
-      req.userId,
+      req.body._id,
       { username, email, firstName, lastName },
       { new: true }
     );

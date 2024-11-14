@@ -36,3 +36,82 @@
   margin: auto;
   text-align: center;
 }
+
+.personal-profile-form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 8px 0;
+}
+
+.personal-profile-input-read-only {
+  font-size: large;
+  background-color: #eeeeee;
+  border: none;
+  border-bottom: solid #d8d8d8 2px;
+  transition-duration: 500ms;
+  transition-property: border-bottom;
+}
+
+.personal-profile-input-read-only:focus {
+  outline: none;
+  border-bottom: #000000 solid 2px;
+}
+
+.personal-profile-input-read-only:hover {
+  border-bottom: #000000 solid 2px;
+}
+
+.personal-profile-label {
+  font-family: "Cabin", Helvetica, sans-serif;
+  font-weight: 600;
+  margin: 0 0 0 0;
+  font-size: 20px;
+}
+
+.personal-profile-form-button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 0 0;
+}
+
+.personal-profile-edit-button {
+  background-color: #919191;
+  color: white;
+  width: 40%;
+  padding: 10px 20px;
+  margin: 0 0 0 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition-duration: 250ms;
+}
+
+.personal-profile-edit-button:hover {
+  background-color: #000000;
+}
+
+.personal-profile-save-button {
+  background-color: #919191;
+  color: white;
+  width: 40%;
+  padding: 10px 20px;
+  margin: 0 0 0 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition-duration: 250ms;
+}
+
+.personal-profile-save-button:hover {
+  background-color: #4a9a00;
+}
+
+.personal-profile-save-button:disabled:hover {
+  background-color: #919191;
+  color: white;
+  cursor: not-allowed;
+}

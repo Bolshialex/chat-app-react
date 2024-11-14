@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/Messages.css";
 import messageFunctions from "../api/messageFunctions";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GoPerson, GoPlus } from "react-icons/go";
 import useAuth from "../hooks/useAuth";
 
