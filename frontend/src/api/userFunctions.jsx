@@ -29,4 +29,18 @@ async function updateUser(accessToken, user) {
   }
 }
 
-export default { getUser, updateUser };
+async function getAllUsers(accessToken) {
+  try {
+    const response = await axios.get(`${API_URL}/users/search`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch {
+    console.error("Error getting all users: ", error);
+    throw error;
+  }
+}
+
+export default { getUser, updateUser, getAllUsers };

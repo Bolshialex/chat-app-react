@@ -38,7 +38,8 @@ function Register() {
       return;
     }
     if (!validator.isStrongPassword(formData.password)) {
-      setError("Password is not strong enough");
+      //show requirements
+      setError("Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.");
       return;
     }
 

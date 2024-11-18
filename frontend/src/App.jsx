@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequireAuth";
 import PersonalProfile from "./pages/PersonalProfile";
+import NewMessage from "./pages/NewMessage";
 import "./styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,6 +22,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/messages" element={<Messages />} />
           <Route path="/profile" element={<PersonalProfile />} />
+          <Route path="/new-message" element={<NewMessage/>}/>
         </Route>
 
         {/* Catch all */}

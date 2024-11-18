@@ -1,21 +1,11 @@
-.messages-card-container {
+.new-message-card-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.messages-heading-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.messages-message-list {
-  overflow: auto;
-}
-
-.messages-card {
+.new-message-card {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -28,43 +18,42 @@
   box-shadow: 7px 5px 30px rgba(0, 0, 0, 0.36);
 }
 
-.messages-card-heading {
+.new-message-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 41px;
+}
+
+.new-message-card-heading {
   font-family: "Cabin", Helvetica, sans-serif;
   font-weight: 700;
-  margin: 0 0 0 0;
+  margin: auto;
   text-align: center;
 }
 
-.messages-message-list {
+.new-message-contact-list {
   padding: 0;
   margin: 0;
 }
 
-.messages-message-list-item {
+.new-message-contact-item {
   list-style: none;
   border-bottom: solid 1px #dddddd;
-  padding: 5px;
+  padding: 15px 10px;
   margin: 0;
   cursor: pointer;
+  border-radius: 3px;
+  transition-duration: 250ms;
 }
 
-.messages-message-list-item:hover {
+.new-message-contact-item:hover {
   background-color: #dddddd;
   border-bottom: solid 1px #cccccc;
 }
 
-.messages-user-heading {
-  margin: 3px;
-  font-size: 30px;
-}
-.messages-user-last {
-  margin: 3px;
-  font-size: 18px;
-  color: #878787;
-}
-
-.messages-icon {
+.new-message-contact-user,
+.new-message-contact-name {
+  padding: 0 0 0 0;
   margin: 0 0 0 0;
-  font-size: 20px;
-  color: #000000;
 }

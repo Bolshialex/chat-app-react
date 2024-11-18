@@ -83,7 +83,7 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await User.find(
       {},
-      { password: 0, _id: 0, createdAt: 0, updatedAt: 0, __v: 0, email: 0 }
+      { password: 0, createdAt: 0, updatedAt: 0, __v: 0, email: 0 }
     ).sort({ username: 1 });
     res.status(200).json(users);
   } catch (error) {

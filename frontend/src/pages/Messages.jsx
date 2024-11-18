@@ -27,7 +27,9 @@ function Main() {
               <GoPerson title="Profile" className="messages-icon" />
             </Link>
             <h1 className="messages-card-heading">Messages</h1>
-            <GoPlus className="messages-icon" />
+            <Link to={"/new-message"}>
+              <GoPlus className="messages-icon" />
+            </Link>
           </div>
 
           <ul className="messages-message-list">
