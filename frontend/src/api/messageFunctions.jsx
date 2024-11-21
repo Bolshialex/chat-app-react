@@ -16,4 +16,19 @@ async function getMessageList(token) {
   }
 }
 
-export default { getMessageList };
+async function getMessages(token, receiverId) {
+  try {
+    const response = await axios.get(`${API_URL}/messages/${receiverId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error getting messages : ", error);
+    throw error;
+  }
+}
+
+export default { getMessageList, getMessages };

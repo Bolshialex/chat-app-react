@@ -31,7 +31,7 @@ function NewMessage() {
               onChange={handleInput}
               fullWidth
               label="Search Contacts"
-              margin="none"
+              autoComplete="off"
             />
           </div>
           <div className="new-message-contact-list-container">

@@ -5,9 +5,9 @@ const Conversation = require("../models/conversationModel");
 
 const getMessages = async (req, res) => {
   const { participant } = req.params;
-  const senderId = req.userId;
+  const senderId = req.user.id;
   try {
-    const participantInfo = await User.findOne({ username: participant });
+    const participantInfo = await User.findById({ _id: participant });
     if (!participantInfo) {
       return res.status(404).json({ message: "Participant not found" });
     }

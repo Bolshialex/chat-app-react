@@ -18,6 +18,7 @@ function Main() {
         console.error("Error getting messages : ", error);
       });
   }, []);
+
   return (
     <>
       <div className="messages-card-container">
@@ -35,16 +36,18 @@ function Main() {
           <ul className="messages-message-list">
             {messages.map((message) => (
               <li key={message._id} className="messages-message-list-item">
-                <div className="messages-message-info-card">
-                  {message.participants.map((user) => (
-                    <h3 key={user._id} className="messages-user-heading">
-                      {user.username}
-                    </h3>
-                  ))}
-                  <p className="messages-user-last">
-                    {message.lastMessage.content}
-                  </p>
-                </div>
+                <Link to={`/messages/${message._id}`} state={{ message }}>
+                  <div className="messages-message-info-card">
+                    {message.participants.map((user) => (
+                      <h5 key={user._id} className="messages-user-heading">
+                        {user.username}
+                      </h5>
+                    ))}
+                    <p className="messages-user-last">
+                      {message.lastMessage.content}
+                    </p>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
